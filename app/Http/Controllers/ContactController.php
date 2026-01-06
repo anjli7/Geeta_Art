@@ -32,7 +32,7 @@ class ContactController extends Controller
             return redirect()->route('contact');
         }
         // HERO from SERVICE
-        $hero = HeroBannerService::get('contact');
+        $hero = HeroBannerService::getPage('contact');
 
         return view('pages.contact', compact('hero'));
     }

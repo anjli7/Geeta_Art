@@ -37,7 +37,7 @@ Route::controller(RegisterController::class)->group(function () {
 // =============================================================
 // PUBLIC PAGES
 // =============================================================
-Route::get('/', fn() => view('pages.index'));
+Route::get('/', [PageController::class, 'index']);
 Route::get('/about',[PageController::class, 'about']);
 Route::get('/customisation', [PageController::class, 'customisation']);
 Route::get('/customer-service',[PageController::class, 'customerService']);
@@ -49,16 +49,23 @@ Route::match(['get', 'post'], '/contact', [ContactController::class, 'contact'])
 // =============================================================
 // COLLECTION PAGES
 // =============================================================
+Route::prefix('collection')->group(function () {
+    Route::get('{slug}', [ProductController::class, 'category'])
+        ->name('collection.category');
+});
+Route::get('/product/{slug}', [ProductController::class, 'show'])
+    ->name('product.show');
+        
 Route::prefix('collection')->name('collection.')->group(function () {
     Route::get('/sofas', [ProductController::class, 'sofas'])->name('sofas');
     Route::get('/tables', [ProductController::class, 'tables'])->name('tables');
     Route::get('/chairs', [ProductController::class, 'chairs'])->name('chairs');
-    Route::get('/wardrobes', [ProductController::class, 'wardrobe'])->name('wardrobe');
+    Route::get('/wardrobes', [ProductController::class, 'wardrobe'])->name('wardrobes');
     Route::get('/tvunit', [ProductController::class, 'tvunit'])->name('tvunit');
-    Route::get('/office-furniture', [ProductController::class, 'officeFurniture'])->name('collection.office-furniture');
-    Route::get('/beds', [ProductController::class, 'beds'])->name('collection.beds');
-    Route::get('/bookshelf', [ProductController::class, 'bookshelf'])->name('collection.bookshelf');
-    Route::get('/product/{slug}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/office-furniture', [ProductController::class, 'officeFurniture'])->name('office-furniture');
+    Route::get('/beds', [ProductController::class, 'beds'])->name('beds');
+    Route::get('/bookshelf', [ProductController::class, 'bookshelf'])->name('bookshelf');
+    Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
 });
 
 

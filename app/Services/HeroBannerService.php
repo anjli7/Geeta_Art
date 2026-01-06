@@ -6,18 +6,21 @@ use App\Models\HeroBanner;
 
 class HeroBannerService
 {
-    public static function get($page)
+    public static function getPage($page)
     {
-        $banner = HeroBanner::where('page_name', $page)
-            ->where('status', 1)
-            ->first();
+        return HeroBanner::where([
+            'ref_type' => 'page',
+            'ref_slug' => $page,
+            'status'   => 1
+        ])->first();
+    }
 
-        return [
-            'title'    => $banner->title ?? ucfirst($page),
-            'subtitle' => $banner->subtitle ?? '',
-            'image'    => $banner->image ?? 'default.jpg',
-            'folder'   => 'background-image/',
-        ];
+    public static function getCategory($slug)
+    {
+        return HeroBanner::where([
+            'ref_type' => 'category',
+            'ref_slug' => $slug,
+            'status'   => 1
+        ])->first();
     }
 }
-?>

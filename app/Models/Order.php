@@ -9,6 +9,9 @@ class Order extends Model
 {
     use HasFactory;
 
+    
+    protected $table = 'orders';
+    
     protected $fillable = [
         'user_id',
         'order_number',
@@ -36,24 +39,5 @@ class Order extends Model
         'total' => 'decimal:2',
     ];
 
-    // Relationships
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function items()
-    {
-        return $this->hasMany(OrderItem::class);
-    }
-
-    // Generate a unique order number
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($order) {
-            $order->order_number = 'ORD-' . strtoupper(uniqid());
-        });
-    }
+   
 }

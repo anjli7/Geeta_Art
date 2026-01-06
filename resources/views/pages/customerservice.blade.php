@@ -1,16 +1,8 @@
 @extends('layout.app')
 
 @section('content')
-<!-- Page Header -->
-<section class="about-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset('assets/images/o.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; padding: 120px 0; color: white; text-align: center;">
-    <div class="container">
-        <div class="hero-content">
-            <h1>Customer Service</h1>
-            <p>We're here to help with any questions or concerns you may have</p>
-        </div>
-    </div>
-</section>
 
+@include('components.hero-banner')
 <!-- Main Content -->
 <div class="container customer-service">
     <div class="service-nav">

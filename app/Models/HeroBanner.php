@@ -9,10 +9,13 @@ class HeroBanner extends Model
 {
     use HasFactory;
 
+    protected $table = 'hero_banners';
     protected $fillable = [
-        'page_name',
+        'ref_type',
+        'ref_slug',
         'title',
         'subtitle',
         'image',
+        'status',
     ];
 }
