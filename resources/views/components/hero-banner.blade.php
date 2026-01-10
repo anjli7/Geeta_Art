@@ -1,6 +1,6 @@
-@php
+<!-- @php
     $bannerImage = $hero->image ?? 'default.jpg';
-@endphp
+@endphp -->
 
 <section class="sofa-hero"
     style="background-image: linear-gradient(
@@ -13,7 +13,6 @@
     padding: 120px 0;
     color: white;
     text-align: center;">
-
     <div class="container">
         <div class="hero-content">
             <h1>{{ $hero->title ?? '' }}</h1>

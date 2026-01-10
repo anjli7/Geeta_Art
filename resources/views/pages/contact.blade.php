@@ -4,14 +4,6 @@
 
 <!-- Hero Section -->
  @include('components.hero-banner')
-<!-- <section class="contact-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset('assets/images/c.jpg') }}');">
-    <div class="container">
-        <div class="hero-content">
-            <h1>Get In Touch</h1>
-            <p>We'd love to hear from you</p>
-        </div>
-    </div>
-</section> -->
 
 <!-- Contact Section -->
 <section class="contact-section">
@@ -19,9 +11,9 @@
         <div class="contact-wrapper">
             <div class="contact-info">
                 <div class="section-header">
-                    <span class="c-heading">CONTACT US</span>
-                    <h3 class="section-title">Visit Our Showroom</h3>
-                    <p>We're here to help and answer any questions you might have. We look forward to hearing from you.</p>
+                    <span class="c-heading">{{$contents['contact_main']->label}}</span>
+                    <h3 class="section-title">{{$contents['contact_main']->title}}</h3>
+                    <p>{{$contents['contact_main']->subtitle}}</p>
                 </div>
 
                 <div class="info-grid">
@@ -30,8 +22,8 @@
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="info-content">
-                            <h4>Our Location</h4>
-                            <p>123 Furniture Street, Art District<br>Jodhpur, 110001</p>
+                            <h4>{{$contents['contact_address']->title}}</h4>
+                            <p>{{$contents['contact_address']->description}}</p>
                         </div>
                     </div>
 
@@ -40,8 +32,8 @@
                             <i class="fas fa-phone-alt"></i>
                         </div>
                         <div class="info-content">
-                            <h4>Phone Number</h4>
-                            <p>+91 98765 43210<br>+91 11 2345 6789</p>
+                            <h4>{{$contents['contact_phone']->title}}</h4>
+                            <p>{{$contents['contact_phone']->description}}</p>
                         </div>
                     </div>
 
@@ -50,8 +42,8 @@
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="info-content">
-                            <h4>Email Address</h4>
-                            <p>info@geetaartcraft.com<br>support@geetaartcraft.com</p>
+                            <h4>{{$contents['contact_email']->title}}</h4>
+                            <p>{{$contents['contact_email']->description}}</p>
                         </div>
                     </div>
 
@@ -60,8 +52,9 @@
                             <i class="fas fa-clock"></i>
                         </div>
                         <div class="info-content">
-                            <h4>Working Hours</h4>
-                            <p>Monday - Saturday: 10:00 - 20:00<br>Sunday: 11:00 - 18:00</p>
+                            <h4>{{$contents['contact_working']->label}}</h4>
+                            <p>{{$contents['contact_working']->title}}</p>
+                            <p>{{$contents['contact_working']->description}}</p>
                         </div>
                     </div>
                 </div>

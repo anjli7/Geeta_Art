@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\HeroBannerService;
 use App\Models\Contact;
-use App\Models\HeroBanner;  
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -31,9 +29,7 @@ class ContactController extends Controller
             // PAGE RELOAD + SUCCESS MESSAGE
             return redirect()->route('contact');
         }
-        // HERO from SERVICE
-        $hero = HeroBannerService::getPage('contact');
 
-        return view('pages.contact', compact('hero'));
+        return view('pages.contact');
     }
 }

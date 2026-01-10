@@ -6,17 +6,17 @@
 
 <section class="half-overlay-section">
     <div class="left-text">
-        <span class="sub-heading">OUR STORY</span>
+        <span class="sub-heading">{{$contents['about_story']->label}}</span>
         <h1 class="main-heading">
-            The story behind the foundation of our company
+            {{$contents['about_story']->title}}
         </h1>
         <p class="para">
-           Geeta Art & Craft is dedicated to creating handcrafted furniture that combines traditional workmanship with modern style. We carefully design every piece to bring comfort, durability, and beauty to your space. Using high-quality materials and skilled craftsmanship, we create furniture that adds a warm and elegant touch to your home or workplace. Our goal is to deliver products that not only look good but also last long and reflect the art and passion behind our work.
+           {{$contents['about_story']->description}}
 
     </div>
 
     <div class="right-image">
-        <img src="{{ asset('assets/images/v.jpg') }}" alt="">
+        <img src="{{ asset('assets/images/'.$contents['about_story']->image) }}" alt="">
     </div>
 </section>
 
@@ -24,29 +24,30 @@
 
 <!-- Team Section -->
 <section class="team-section">
-    <div class="container">
-        <h2 class="section-title">Meet Our Team</h2>
+    <div class="container text-center">
+        <h2 class="section-title">{{$contents['team_heading']->title}}</h2>
+        <p class="section-subtitle">{{$contents['team_heading']->subtitle}}</p>
         <div class="team-grid">
             <div class="team-member">
                 <div class="member-image">
-                    <img src="{{ asset('assets/images/avtar1.png') }}" alt="Team Member" class="img-fluid">
+                    <img src="{{ asset('assets/images/'.$contents['member1']->image) }}" alt="Team Member" class="img-fluid">
                 </div>
-                <h3>Team</h3>
-                <p>Founder & Art Director</p>
+                <h3>{{$contents['member1']->label}}</h3>
+                <p>{{$contents['member1']->subtitle}}</p>
             </div>
             <div class="team-member">
                 <div class="member-image">
-                    <img src="{{ asset('assets/images/avtar2.png') }}" alt="Team Member" class="img-fluid">
+                    <img src="{{ asset('assets/images/'.$contents['member2']->image) }}" alt="Team Member" class="img-fluid">
                 </div>
-                <h3>Team</h3>
-                <p>Creative Head</p>
+                <h3>{{$contents['member2']->label}}</h3>
+                <p>{{$contents['member2']->subtitle}}</p>
             </div>
             <div class="team-member">
                 <div class="member-image">
-                    <img src="{{ asset('assets/images/avtar3.png') }}" alt="Team Member" class="img-fluid">
+                    <img src="{{ asset('assets/images/'.$contents['member3']->image) }}" alt="Team Member" class="img-fluid">
                 </div>
-                <h3>Team</h3>
-                <p>Customer Relations</p>
+                <h3>{{$contents['member3']->label}}</h3>
+                <p>{{$contents['member3']->subtitle}}</p>
             </div>
         </div>
     </div>

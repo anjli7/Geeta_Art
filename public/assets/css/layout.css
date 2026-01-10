@@ -97,6 +97,28 @@
     flex: 1;
     max-width: 500px;
 }
+.search-form{
+    display:flex;
+    width:100%;
+}
+
+.mobile-search-form{
+    display:flex;
+    align-items:center;
+    width:100%;
+}
+
+.mobile-search-form input{
+    border:none;
+    outline:none;
+    width:100%;
+}
+
+.mobile-search-form button{
+    background:none;
+    border:none;
+}
+
 
 .search-box {
     display: flex;

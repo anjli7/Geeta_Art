@@ -7,17 +7,17 @@
 
  <section class="half-overlay-section">
     <div class="left-text">
-        <span class="sub-heading">CUSTOMISATION PROCESS</span>
+        <span class="sub-heading">{{$contents['cust_main']->label}}</span>
         <h1 class="main-heading">
-             Design Your Perfect Piece
+             {{$contents['cust_main']->title}}
         </h1>
         <p class="para">
-            At Geeta Art & Craft, we understand that your furniture should be as unique as you are. Our customisation service allows you to create one-of-a-kind pieces that perfectly match your style, space, and needs. From choosing the materials to selecting the perfect finish, we'll work with you every step of the way to bring your vision to life.
+            {{$contents['cust_main']->description}}
 
     </div>
 
     <div class="right-image">
-        <img src="{{ asset('assets/images/y.jpg') }}" alt="">
+        <img src="{{ asset('assets/images/'.$contents['cust_main']->image) }}" alt="">
     </div>
 </section>
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\SearchController;
 
 // =============================================================
 // AUTH & LOGIN
@@ -38,11 +39,17 @@ Route::controller(RegisterController::class)->group(function () {
 // PUBLIC PAGES
 // =============================================================
 Route::get('/', [PageController::class, 'index']);
-Route::get('/about',[PageController::class, 'about']);
+Route::get('/about', [PageController::class, 'about']);
 Route::get('/customisation', [PageController::class, 'customisation']);
-Route::get('/customer-service',[PageController::class, 'customerService']);
-Route::match(['get', 'post'], '/contact', [ContactController::class, 'contact'])->name('contact');
+Route::get('/customer-service', [PageController::class, 'customerservice']);
+// CONTACT PAGE LOAD
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 
+// CONTACT FORM SUBMIT
+Route::post('/contact', [ContactController::class, 'store'])
+    ->name('contact.store');
+Route::get('/search', [SearchController::class, 'index'])
+    ->name('search');
 
 
 
@@ -55,18 +62,7 @@ Route::prefix('collection')->group(function () {
 });
 Route::get('/product/{slug}', [ProductController::class, 'show'])
     ->name('product.show');
-        
-Route::prefix('collection')->name('collection.')->group(function () {
-    Route::get('/sofas', [ProductController::class, 'sofas'])->name('sofas');
-    Route::get('/tables', [ProductController::class, 'tables'])->name('tables');
-    Route::get('/chairs', [ProductController::class, 'chairs'])->name('chairs');
-    Route::get('/wardrobes', [ProductController::class, 'wardrobe'])->name('wardrobes');
-    Route::get('/tvunit', [ProductController::class, 'tvunit'])->name('tvunit');
-    Route::get('/office-furniture', [ProductController::class, 'officeFurniture'])->name('office-furniture');
-    Route::get('/beds', [ProductController::class, 'beds'])->name('beds');
-    Route::get('/bookshelf', [ProductController::class, 'bookshelf'])->name('bookshelf');
-    Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
-});
+
 
 
 // =============================================================

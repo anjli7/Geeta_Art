@@ -14,12 +14,29 @@
             </div>
 
             <div class="nav-right">
-                <div class="search-container">
+                <!-- <div class="search-container">
                     <div class="search-box">
                         <input type="text" placeholder="Search products..." class="search-input">
                         <button type="submit" class="search-btn">
                             <i class="fas fa-search"></i>
                         </button>
+                    </div>
+                </div> -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <form action="{{ route('search') }}" method="GET" class="search-form">
+
+                            <input type="text"
+                                name="q"
+                                placeholder="Search products..."
+                                class="search-input"
+                                required>
+
+                            <button type="submit" class="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+
+                        </form>
                     </div>
                 </div>
 
@@ -55,12 +72,31 @@
 
         <div class="menu-container">
             <div class="container">
-                <div class="mobile-search">
+                <!-- <div class="mobile-search">
                     <div class="search">
                         <input type="text" placeholder="Search products...">
                         <a href="#" class="search-icon"><i class="fa-solid fa-search"></i></a>
                     </div>
+                </div> -->
+                <div class="mobile-search">
+                    <div class="search">
+
+                        <form action="{{ route('search') }}" method="GET" class="mobile-search-form">
+
+                            <input type="text"
+                                name="q"
+                                placeholder="Search products..."
+                                required>
+
+                            <button type="submit" class="search-icon">
+                                <i class="fa-solid fa-search"></i>
+                            </button>
+
+                        </form>
+
+                    </div>
                 </div>
+
                 <ul class="main-menu">
                     <li class="menu-item {{ request()->is('/') ? 'active' : '' }}">
                         <a href="{{ url('/') }}" class="menu-link">Home</a>
@@ -68,17 +104,18 @@
                     <li class="menu-item {{ request()->is('about') || request()->is('about/*') ? 'active' : '' }}">
                         <a href="{{ url('/about') }}" class="menu-link">About Us</a>
                     </li>
-                    <li class="menu-item menu-item-has-children {{ request()->is('collection') || request()->is('collection/*') ? 'active' : '' }}">
-                        <a href="" class="menu-link">Collections</a>
+                    <li class="menu-item menu-item-has-children {{ request()->is('collection/*') ? 'active' : '' }}">
+                        <a href="#" class="menu-link">Collections</a>
+
                         <ul class="sub-menu">
-                            <li class="sub-menu-item"><a href="{{ url('/collection/sofas') }}" class="sub-menu-link">Sofas</a></li>
-                            <li class="sub-menu-item"><a href="{{ url('/collection/tables') }}" class="sub-menu-link">Tables</a></li>
-                            <li class="sub-menu-item"><a href="{{ url('/collection/wardrobes') }}" class="sub-menu-link">Wardrobes</a></li>
-                            <li class="sub-menu-item"><a href="{{ url('/collection/tvunit') }}" class="sub-menu-link">TV Units</a></li>
-                            <li class="sub-menu-item"><a href="{{ url('/collection/office-furniture') }}" class="sub-menu-link">Office Furniture</a></li>
-                            <li class="sub-menu-item"><a href="{{ url('/collection/chairs') }}" class="sub-menu-link">Chairs</a></li>
-                            <li class="sub-menu-item"><a href="{{ url('/collection/beds') }}" class="sub-menu-link">Beds</a></li>
-                            <li class="sub-menu-item"><a href="{{ url('/collection/bookshelf') }}" class="sub-menu-link">Bookshelf</a></li>
+                            @foreach($menuCategories as $category)
+                            <li class="sub-menu-item">
+                                <a href="{{ url('/collection/'.$category->slug) }}"
+                                    class="sub-menu-link {{ request()->is('collection/'.$category->slug) ? 'active' : '' }}">
+                                    {{ $category->name }}
+                                </a>
+                            </li>
+                            @endforeach
                         </ul>
                     </li>
                     <li class="menu-item {{ request()->is('customisation') || request()->is('customisation/*') ? 'active' : '' }}">

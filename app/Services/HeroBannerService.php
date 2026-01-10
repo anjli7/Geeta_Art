@@ -6,11 +6,11 @@ use App\Models\HeroBanner;
 
 class HeroBannerService
 {
-    public static function getPage($page)
+    public static function getPage($slug)
     {
         return HeroBanner::where([
             'ref_type' => 'page',
-            'ref_slug' => $page,
+            'ref_slug' => $slug,
             'status'   => 1
         ])->first();
     }
