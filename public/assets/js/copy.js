@@ -354,3 +354,200 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+// all in one code 
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* ================= LOGIN / AUTH ================= */
+    setupRememberMeValidation();
+    setupAuthTabs();
+    handleLoginState();
+
+    /* ================= SLIDERS ================= */
+    initCustomSlider();
+    initBootstrapCarousel();
+
+    /* ================= UI ================= */
+    initMobileMenu();
+    initSearch();
+
+    /* ================= ANIMATIONS ================= */
+    initHeroAnimation();
+    initFeatureAnimation();
+    initAboutAnimation();
+    initGalleryAnimation();
+
+    /* ================= CART ================= */
+    initCart();
+});
+
+/* ========== LOGIN ========== */
+function setupRememberMeValidation() {
+    const form = document.querySelector('form[action$="login"]');
+    if (!form) return;
+
+    const checkbox = document.getElementById("remember");
+    const error = document.getElementById("rememberError");
+
+    form.addEventListener("submit", e => {
+        if (!checkbox.checked) {
+            e.preventDefault();
+            error.style.display = "block";
+            checkbox.focus();
+        }
+    });
+
+    checkbox.addEventListener("change", () => {
+        error.style.display = "none";
+    });
+}
+
+function setupAuthTabs() {
+    const buttons = document.querySelectorAll(".auth-tab-btn");
+    const forms = document.querySelectorAll(".auth-form-item");
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            buttons.forEach(b => b.classList.remove("active"));
+            forms.forEach(f => f.classList.remove("active"));
+
+            btn.classList.add("active");
+            document.getElementById(btn.dataset.tab)?.classList.add("active");
+        });
+    });
+}
+
+function handleLoginState() {
+    const showLogin = document.body.dataset.showLogin === "1";
+    const showRegister = document.body.dataset.showRegister === "1";
+
+    if (showLogin) toggleAuthTab("login");
+    if (showRegister) toggleAuthTab("register");
+}
+
+function toggleAuthTab(id) {
+    document.querySelectorAll(".nav-link, .auth-form-item")
+        .forEach(el => el.classList.remove("active"));
+
+    document.querySelector(`[href="#${id}"]`)?.classList.add("active");
+    document.getElementById(id)?.classList.add("active");
+}
+
+/* ========== SLIDER ========== */
+function initCustomSlider() {
+    const list = document.querySelector(".image-list");
+    if (!list) return;
+
+    document.querySelectorAll(".slider-button").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const dir = btn.id === "prev-slider" ? -1 : 1;
+            list.scrollBy({ left: list.clientWidth * dir, behavior: "smooth" });
+        });
+    });
+}
+
+function initBootstrapCarousel() {
+    const carousel = document.getElementById("homeCarousel");
+    if (carousel && window.bootstrap) {
+        new bootstrap.Carousel(carousel, {
+            interval: 3000,
+            wrap: true,
+            touch: true
+        });
+    }
+}
+
+/* ========== UI ========== */
+function initMobileMenu() {
+    const btn = document.querySelector(".mobile-menu-btn");
+    const menu = document.querySelector(".menu-container");
+    if (!btn || !menu) return;
+
+    btn.addEventListener("click", () => {
+        btn.classList.toggle("active");
+        menu.classList.toggle("active");
+        document.body.classList.toggle("menu-open");
+    });
+}
+
+function initSearch() {
+    document.querySelectorAll(".search-input").forEach(input => {
+        input.addEventListener("keypress", e => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                console.log("Search:", input.value.trim());
+            }
+        });
+    });
+}
+
+/* ========== ANIMATIONS ========== */
+function initHeroAnimation() {
+    const hero = document.querySelector(".hero");
+    if (!hero) return;
+
+    new IntersectionObserver(entries => {
+        entries.forEach(e =>
+            hero.classList.toggle("animate-in", e.isIntersecting)
+        );
+    }, { threshold: 0.3 }).observe(hero);
+}
+
+function initFeatureAnimation() {
+    document.querySelectorAll(".feature-item").forEach((item, i) => {
+        item.style.opacity = 0;
+        item.style.transform = "translateY(40px)";
+        setTimeout(() => {
+            item.style.opacity = 1;
+            item.style.transform = "translateY(0)";
+        }, 200 * i);
+    });
+}
+
+function initAboutAnimation() {
+    const section = document.querySelector(".half-overlay-section");
+    if (!section) return;
+
+    const left = section.querySelector(".left-text");
+    const right = section.querySelector(".right-image");
+
+    new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            left.classList.toggle("animate-left", e.isIntersecting);
+            right.classList.toggle("animate-right", e.isIntersecting);
+        });
+    }, { threshold: 0.2 }).observe(section);
+}
+
+function initGalleryAnimation() {
+    document.querySelectorAll(".gallery-item-wrapper").forEach(item => {
+        new IntersectionObserver(entries => {
+            entries.forEach(e =>
+                item.classList.toggle("in-view", e.isIntersecting)
+            );
+        }, { threshold: 0.3 }).observe(item);
+    });
+}
+
+/* ========== CART ========== */
+function initCart() {
+    let itemToRemove = null;
+
+    window.gta_openRemoveModal = btn => {
+        itemToRemove = btn.closest(".gta-cart-item");
+        document.getElementById("gta-removeModal")?.classList.add("gta-active");
+    };
+
+    window.gta_confirmRemove = () => {
+        itemToRemove?.remove();
+        itemToRemove = null;
+        document.getElementById("gta-removeModal")?.classList.remove("gta-active");
+    };
+
+    window.gta_closeRemoveModal = () => {
+        itemToRemove = null;
+        document.getElementById("gta-removeModal")?.classList.remove("gta-active");
+    };
+}
+
